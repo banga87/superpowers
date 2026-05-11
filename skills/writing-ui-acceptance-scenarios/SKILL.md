@@ -1,6 +1,6 @@
 ---
 name: writing-ui-acceptance-scenarios
-description: Use after writing-plans has produced an implementation plan for a feature with UI surface, before implementation starts, to capture how a user verifies the feature works in the running app
+description: Use when writing-plans has produced an implementation plan for a feature with UI surface, before implementation starts
 ---
 
 # Writing UI Acceptance Scenarios
@@ -43,14 +43,14 @@ When invoked, follow these eight steps in order. Do not skip steps.
 
 ### Step 1: Identify the feature and locate inputs
 
-Ask the human which feature this skill is being run for. Accept either:
+Ask your human partner which feature this skill is being run for. Accept either:
 
 - A short feature slug (e.g. `dashboard-search`), or
 - An explicit path to the spec and plan files
 
 Resolve to the most recent matching spec at `docs/superpowers/specs/YYYY-MM-DD-<feature>-design.md` and plan at `docs/superpowers/plans/YYYY-MM-DD-<feature>.md`.
 
-If either cannot be located after asking, STOP. Tell the human:
+If either cannot be located after asking, STOP. Tell your human partner:
 
 > "A spec and plan are required first. Please run `superpowers:brainstorming` to produce a spec, then `superpowers:writing-plans` to produce a plan."
 
@@ -63,7 +63,7 @@ v1 is UI-only. Confirm the feature has front-end surface by inspecting the plan'
 
 OR inspect the spec for sections describing user-observable behaviour (rendered UI, click handlers, form interactions).
 
-If no front-end surface is detected, STOP. Tell the human:
+If no front-end surface is detected, STOP. Tell your human partner:
 
 > "v1 of writing-ui-acceptance-scenarios is UI-only. Backend (API contracts) and CLI surfaces are deferred to v2. This feature has no front-end surface I can identify in the plan."
 
@@ -73,13 +73,13 @@ Do not author API scenarios. Do not author CLI scenarios. The skill stops cleanl
 
 Pull every acceptance criterion from the spec. These map to scenarios 2..N of the doc.
 
-If the primary user flow is not explicit in the spec, ask the human:
+If the primary user flow is not explicit in the spec, ask your human partner:
 
 > "What is the primary user flow for this feature, in one sentence?"
 
 The answer becomes scenario 1.
 
-Do NOT invent acceptance criteria the spec does not contain. If the spec is light, ask the human:
+Do NOT invent acceptance criteria the spec does not contain. If the spec is light, ask your human partner:
 
 > "The spec lists N acceptance criteria. Do you want to add more before I write scenarios, or proceed with just these N?"
 
@@ -89,7 +89,7 @@ Wait for the answer. Do not smuggle new requirements in.
 
 From spec and plan, list known surfaces (routes, components, screens).
 
-Ask the human for anything not derivable:
+Ask your human partner for anything not derivable:
 
 - Dev server URL
 - Test account credentials (or how to create a fresh test user)
@@ -128,9 +128,9 @@ git commit -m "docs: add UI acceptance scenarios for <feature>"
 
 ### Step 8: Terminal handback
 
-Report the path to the human. Suggest they review the doc and execute it manually, or pass it to their preferred MCP-equipped agent.
+Report the path to your human partner. Suggest they review the doc and execute it manually, or pass it to their preferred MCP-equipped agent.
 
-Do NOT invoke any other skill. This skill is terminal. The user's request ends here.
+Do NOT invoke any other skill. This skill is terminal. The request ends here.
 
 ## Self-Review
 
@@ -156,13 +156,13 @@ If you catch yourself doing any of these, STOP and reassess. Each is a violation
 
 - About to write a scenario whose `Then` is a code-level assertion → that scenario belongs in TDD; delete it from this doc
 - About to add Playwright, Cypress, Puppeteer, DevTools, `curl`, or any tool-specific syntax → strip it; the doc is tool-agnostic, full stop
-- About to author scenarios without reading the spec → stop; locate the spec or ask the human for it
-- About to author for a project with no front-end surface → stop; v1 is UI-only and you must tell the human cleanly
-- About to author API or CLI scenarios "because the user asked" → stop; the user asking does not change v1 scope. Tell them v1 is UI-only.
-- About to invent an acceptance criterion the spec does not contain → stop; ask the human whether to add it to the spec first
+- About to author scenarios without reading the spec → stop; locate the spec or ask your human partner for it
+- About to author for a project with no front-end surface → stop; v1 is UI-only and you must tell your human partner cleanly
+- About to author API or CLI scenarios "because the user asked" → stop; the request does not change v1 scope. Tell your human partner v1 is UI-only.
+- About to invent an acceptance criterion the spec does not contain → stop; ask your human partner whether to add it to the spec first
 - About to fill in a `Last run` or `Result` field during authoring → stop; that field belongs in the sibling results file written by whoever executes the doc
 - About to add scenarios for edge cases not in the spec ("be thorough") → stop; edge cases live in `test-driven-development`. This doc caps at primary + per-criterion + hard fails.
-- About to invoke another skill at the end → don't; this skill is a terminal leaf. Hand back to the human.
+- About to invoke another skill at the end → don't; this skill is a terminal leaf. Hand back to your human partner.
 
 **All of these mean: STOP and fix before continuing.**
 
@@ -172,11 +172,11 @@ If you catch yourself doing any of these, STOP and reassess. Each is a violation
 |--------|---------|
 | "Adding Playwright would save the user 20 minutes" | The user has their own MCP. The doc is consumed by *whatever* they have. Couple it to Playwright and other users can't run it. Save the 20 minutes; cost everyone else hours. |
 | "The team uses this skill for both UI and API features" | v1 is UI-only. Tech lead authority does not change v1 scope. Tell them v1 is UI-only and direct them to file a v2 request. |
-| "The spec is light — I'll fill in reasonable acceptance criteria" | Invented criteria become invisible requirements that no one signed off on. Ask the human or stop. |
+| "The spec is light — I'll fill in reasonable acceptance criteria" | Invented criteria become invisible requirements that no one signed off on. Ask your human partner or stop. |
 | "Be thorough — cover all the edge cases" | Edge cases live in TDD. This doc caps at primary flow + per-acceptance-criterion + hard fails. "Thorough" at the wrong layer is noise. |
 | "I'll log this run's results in the doc as I write it" | The doc is a *plan*. Results live in the sibling results file written by the executor. Authoring and executing are separate phases. |
-| "The user asked me to hand off to executing-plans" | This skill is terminal. After write + commit, hand back to the human. Tell them they can invoke `superpowers:executing-plans` themselves. |
-| "The plan implies UI even though I can't see front-end files" | If you can't see UI surface in the plan or spec, you can't write UI scenarios. Stop and tell the human. |
+| "The user asked me to hand off to executing-plans" | This skill is terminal. After write + commit, hand back to your human partner. Tell them they can invoke `superpowers:executing-plans` themselves. |
+| "The plan implies UI even though I can't see front-end files" | If you can't see UI surface in the plan or spec, you can't write UI scenarios. Stop and tell your human partner. |
 | "API scenarios are the same idea — Postman is just a different runner" | They are not the same idea. UI scenarios verify rendered state and user interactions. API scenarios verify request/response contracts. v1 is UI. Backend is v2. |
 | "I'm following the spirit of the skill by being helpful" | Violating the letter of the rules is violating the spirit. |
 
@@ -186,11 +186,9 @@ If you catch yourself doing any of these, STOP and reassess. Each is a violation
 |--------|-----|
 | Scenarios re-state spec prose verbatim | Re-phrase as a user *observing* behaviour: "Then the saved indicator appears" not "Then the save endpoint succeeds" |
 | Then clauses are vague ("Then it works", "Then the form submits") | Name the visible artifact: rendered text, route change, badge state |
-| Exhaustive edge cases included | Cap depth at primary flow + per-acceptance-criterion + hard fails. Edge cases go in TDD. |
 | Multiple `When` lines without `And` continuation | Use `And` to chain actions in one scenario, or split into two scenarios |
-| Setup section missing dev URL | Ask the human; never invent a URL |
-| Skill invoked before any plan exists | Tell the human to run `superpowers:writing-plans` first |
-| Backend-only project | v1 is UI-only; tell the human cleanly and stop |
+| Setup section missing dev URL | Ask your human partner; never invent a URL |
+| Skill invoked before any plan exists | Tell your human partner to run `superpowers:writing-plans` first |
 | Doc title omits the feature name | Format: `<feature> — UI Acceptance Scenarios` |
 | Tool-specific selector or assertion sneaks into a scenario | Strip it. Scenarios describe what a user does and sees, not how a runner identifies elements. |
 
